@@ -1,18 +1,44 @@
-let song;
+// Daniel Shiffman
+// http://codingtra.in
+// http://patreon.com/codingtrain
+// Code for: https://youtu.be/Bk8rLzzSink
+
+var wave;
+
+var button;
+var slider;
+var playing = false;
 
 function setup() {
-  song = loadSound('ambient.mp3');
-  createCanvas(720, 200);
-  background(255, 0, 0);
+  createCanvas(100, 100);
+  wave = new p5.Oscillator();
+  slider = createSlider(100, 1200, 440);
+
+  wave.setType('sine');
+  wave.start();
+  wave.freq(440);
+  wave.amp(0);
+
+  button = createButton('play/pause');
+  button.mousePressed(toggle);
 }
 
-function mousePressed() {
-  if (song.isPlaying()) {
-    // .isPlaying() returns a boolean
-    song.stop();
-    background(255, 0, 0);
+function draw() {
+  wave.freq(slider.value());
+  if (playing) {
+    background(255, 0, 255);
   } else {
-    song.play();
-    background(0, 255, 0);
+    background(51);
   }
 }
+
+function toggle() {
+  if (!playing) {
+    wave.amp(0.5, 1);
+    playing = true;
+  } else {
+    wave.amp(0, 1);
+    playing = false;
+  }
+}
+
