@@ -1,3 +1,5 @@
+//based on tutorials from https://p5js.org/reference/
+
 let synth, soundLoop, soundLoop2;
 let notePattern = [60, 62, 64, 67, 69, 72];
 let notePattern2 = [72, 74, 59, 55, 53];
